@@ -1,0 +1,35 @@
+version: '3.3'
+
+services: 
+  medi-db:
+    container_name: medidb
+    image: mysql
+    restart: always
+    env_file: 
+      - .env
+    volumes: 
+      - medi-db-volume:/var/lib/mysql:rw
+      - ./initdb.sql:/docker-entrypoint-initdb.d/init.sql
+    networks: 
+      - medi-network-api
+      - medi-network-utility
+    ports:
+      - 3306:3306
+
+  adminer:
+    container_name: medidbutility
+    depends_on: 
+      - medi-db
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8080
+    networks: 
+      - medi-network-utility
+
+volumes:
+  medi-db-volume:
+
+networks: 
+  medi-network-api:
+  medi-network-utility:
