@@ -3,6 +3,7 @@
 SET NAMES utf8;
 SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
 SET NAMES utf8mb4;
 
@@ -10,53 +11,58 @@ DROP DATABASE IF EXISTS `mediusers`;
 CREATE DATABASE `mediusers` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mediusers`;
 
-DROP TABLE IF EXISTS `Concentrations`;
-CREATE TABLE `Concentrations` (
+DROP TABLE IF EXISTS `concentrations`;
+CREATE TABLE `concentrations` (
   `concentration_id` tinyint NOT NULL AUTO_INCREMENT,
   `concentration_amount` varchar(255) NOT NULL,
   PRIMARY KEY (`concentration_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `concentrations`;
 
-DROP TABLE IF EXISTS `Conditions`;
-CREATE TABLE `Conditions` (
+DROP TABLE IF EXISTS `conditions`;
+CREATE TABLE `conditions` (
   `condition_id` int NOT NULL AUTO_INCREMENT,
   `condition_name` varchar(255) NOT NULL,
   `condition_details` varchar(255) NOT NULL,
   `user_info_id` int NOT NULL,
   PRIMARY KEY (`condition_id`),
   KEY `user_info_id` (`user_info_id`),
-  CONSTRAINT `Conditions_ibfk_1` FOREIGN KEY (`user_info_id`) REFERENCES `UserInfo` (`user_info_id`) ON DELETE CASCADE
+  CONSTRAINT `conditions_ibfk_1` FOREIGN KEY (`user_info_id`) REFERENCES `user_info` (`user_info_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `conditions`;
 
-DROP TABLE IF EXISTS `Dosages`;
-CREATE TABLE `Dosages` (
+DROP TABLE IF EXISTS `dosages`;
+CREATE TABLE `dosages` (
   `dosage_id` int NOT NULL AUTO_INCREMENT,
   `dosage_type` varchar(255) NOT NULL,
   PRIMARY KEY (`dosage_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `dosages`;
 
-DROP TABLE IF EXISTS `Feelings`;
-CREATE TABLE `Feelings` (
+DROP TABLE IF EXISTS `feelings`;
+CREATE TABLE `feelings` (
   `feeling_id` int NOT NULL AUTO_INCREMENT,
   `feeling_name` varchar(255) NOT NULL,
   PRIMARY KEY (`feeling_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `feelings`;
 
-DROP TABLE IF EXISTS `Frequency`;
-CREATE TABLE `Frequency` (
+DROP TABLE IF EXISTS `frequencies`;
+CREATE TABLE `frequencies` (
   `frequency_id` int NOT NULL AUTO_INCREMENT,
   `frequency` varchar(255) NOT NULL,
   `repetition` int NOT NULL,
   PRIMARY KEY (`frequency_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `frequencies`;
 
-DROP TABLE IF EXISTS `JournalEntries`;
-CREATE TABLE `JournalEntries` (
+DROP TABLE IF EXISTS `journal_entries`;
+CREATE TABLE `journal_entries` (
   `entry_id` int NOT NULL AUTO_INCREMENT,
   `user_info_id` int NOT NULL,
   `timestamp` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -65,37 +71,40 @@ CREATE TABLE `JournalEntries` (
   PRIMARY KEY (`entry_id`),
   KEY `user_info_id` (`user_info_id`),
   KEY `feeling_id` (`feeling_id`),
-  CONSTRAINT `JournalEntries_ibfk_1` FOREIGN KEY (`user_info_id`) REFERENCES `UserInfo` (`user_info_id`) ON DELETE CASCADE,
-  CONSTRAINT `JournalEntries_ibfk_2` FOREIGN KEY (`feeling_id`) REFERENCES `Feelings` (`feeling_id`) ON DELETE CASCADE
+  CONSTRAINT `journal_entries_ibfk_1` FOREIGN KEY (`user_info_id`) REFERENCES `user_info` (`user_info_id`) ON DELETE CASCADE,
+  CONSTRAINT `journal_entries_ibfk_2` FOREIGN KEY (`feeling_id`) REFERENCES `feelings` (`feeling_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `journal_entries`;
 
-DROP TABLE IF EXISTS `TakeTimeAllocation`;
-CREATE TABLE `TakeTimeAllocation` (
+DROP TABLE IF EXISTS `take_time_allocation`;
+CREATE TABLE `take_time_allocation` (
   `take_time_freq_id` int NOT NULL AUTO_INCREMENT,
   `frequency_id` int NOT NULL,
   `take_time_id` int NOT NULL,
   PRIMARY KEY (`take_time_freq_id`),
   KEY `frequency_id` (`frequency_id`),
   KEY `take_time_id` (`take_time_id`),
-  CONSTRAINT `TakeTimeAllocation_ibfk_1` FOREIGN KEY (`frequency_id`) REFERENCES `Frequency` (`frequency_id`) ON DELETE CASCADE,
-  CONSTRAINT `TakeTimeAllocation_ibfk_2` FOREIGN KEY (`take_time_id`) REFERENCES `TakenTimes` (`take_time_id`) ON DELETE CASCADE
+  CONSTRAINT `take_time_allocation_ibfk_1` FOREIGN KEY (`frequency_id`) REFERENCES `frequencies` (`frequency_id`) ON DELETE CASCADE,
+  CONSTRAINT `take_time_allocation_ibfk_2` FOREIGN KEY (`take_time_id`) REFERENCES `taken_times` (`take_time_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `take_time_allocation`;
 
-DROP TABLE IF EXISTS `TakenTimes`;
-CREATE TABLE `TakenTimes` (
+DROP TABLE IF EXISTS `taken_times`;
+CREATE TABLE `taken_times` (
   `take_time_id` int NOT NULL AUTO_INCREMENT,
   `time` time NOT NULL,
   `preference_id` int NOT NULL,
   PRIMARY KEY (`take_time_id`),
   KEY `preference_id` (`preference_id`),
-  CONSTRAINT `TakenTimes_ibfk_1` FOREIGN KEY (`preference_id`) REFERENCES `TimePreferences` (`preference_id`) ON DELETE RESTRICT
+  CONSTRAINT `taken_times_ibfk_1` FOREIGN KEY (`preference_id`) REFERENCES `time_preferences` (`preference_id`) ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `taken_times`;
 
-DROP TABLE IF EXISTS `TakenTreatmentLog`;
-CREATE TABLE `TakenTreatmentLog` (
+DROP TABLE IF EXISTS `taken_treatment_log`;
+CREATE TABLE `taken_treatment_log` (
   `taken_log_id` int NOT NULL AUTO_INCREMENT,
   `user_info_id` int NOT NULL,
   `treatment_id` int NOT NULL,
@@ -105,21 +114,23 @@ CREATE TABLE `TakenTreatmentLog` (
   PRIMARY KEY (`taken_log_id`),
   KEY `user_info_id` (`user_info_id`),
   KEY `treatment_id` (`treatment_id`),
-  CONSTRAINT `TakenTreatmentLog_ibfk_1` FOREIGN KEY (`user_info_id`) REFERENCES `UserInfo` (`user_info_id`) ON DELETE CASCADE,
-  CONSTRAINT `TakenTreatmentLog_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `Treatments` (`treatment_id`)
+  CONSTRAINT `taken_treatment_log_ibfk_1` FOREIGN KEY (`user_info_id`) REFERENCES `user_info` (`user_info_id`) ON DELETE CASCADE,
+  CONSTRAINT `taken_treatment_log_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `treatments` (`treatment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `taken_treatment_log`;
 
-DROP TABLE IF EXISTS `TimePreferences`;
-CREATE TABLE `TimePreferences` (
+DROP TABLE IF EXISTS `time_preferences`;
+CREATE TABLE `time_preferences` (
   `preference_id` int NOT NULL AUTO_INCREMENT,
   `preference_type` varchar(255) NOT NULL,
   PRIMARY KEY (`preference_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `time_preferences`;
 
-DROP TABLE IF EXISTS `Treatments`;
-CREATE TABLE `Treatments` (
+DROP TABLE IF EXISTS `treatments`;
+CREATE TABLE `treatments` (
   `treatment_id` int NOT NULL AUTO_INCREMENT,
   `unit_id` int NOT NULL,
   `dosage_id` int NOT NULL,
@@ -131,56 +142,65 @@ CREATE TABLE `Treatments` (
   KEY `dosage_id` (`dosage_id`),
   KEY `concentration_id` (`concentration_id`),
   KEY `frequency_id` (`frequency_id`),
-  CONSTRAINT `Treatments_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `Units` (`unit_id`) ON DELETE CASCADE,
-  CONSTRAINT `Treatments_ibfk_2` FOREIGN KEY (`dosage_id`) REFERENCES `Dosages` (`dosage_id`) ON DELETE CASCADE,
-  CONSTRAINT `Treatments_ibfk_3` FOREIGN KEY (`concentration_id`) REFERENCES `Concentrations` (`concentration_id`) ON DELETE CASCADE,
-  CONSTRAINT `Treatments_ibfk_4` FOREIGN KEY (`frequency_id`) REFERENCES `Frequency` (`frequency_id`) ON DELETE CASCADE
+  CONSTRAINT `treatments_ibfk_1` FOREIGN KEY (`unit_id`) REFERENCES `units` (`unit_id`) ON DELETE CASCADE,
+  CONSTRAINT `treatments_ibfk_2` FOREIGN KEY (`dosage_id`) REFERENCES `dosages` (`dosage_id`) ON DELETE CASCADE,
+  CONSTRAINT `treatments_ibfk_3` FOREIGN KEY (`concentration_id`) REFERENCES `concentrations` (`concentration_id`) ON DELETE CASCADE,
+  CONSTRAINT `treatments_ibfk_4` FOREIGN KEY (`frequency_id`) REFERENCES `frequencies` (`frequency_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `treatments`;
 
-DROP TABLE IF EXISTS `Units`;
-CREATE TABLE `Units` (
+DROP TABLE IF EXISTS `units`;
+CREATE TABLE `units` (
   `unit_id` int NOT NULL AUTO_INCREMENT,
   `unit_name` varchar(255) NOT NULL,
   PRIMARY KEY (`unit_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `units`;
 
-DROP TABLE IF EXISTS `UserAccounts`;
-CREATE TABLE `UserAccounts` (
+DROP TABLE IF EXISTS `user_accounts`;
+CREATE TABLE `user_accounts` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `create_date` date NOT NULL,
   `last_login` timestamp NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `user_accounts`;
+INSERT INTO `user_accounts` (`user_id`, `email`, `password`, `create_date`, `last_login`) VALUES
+(1,	'gigel@email.com',	'sha512',	'2014-03-20',	'2015-03-20 21:00:00');
 
-DROP TABLE IF EXISTS `UserInfo`;
-CREATE TABLE `UserInfo` (
+DROP TABLE IF EXISTS `user_info`;
+CREATE TABLE `user_info` (
   `user_info_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `gender` varchar(255) NOT NULL,
-  `birthday` date NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
   PRIMARY KEY (`user_info_id`),
   KEY `user_id` (`user_id`),
-  CONSTRAINT `UserInfo_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `UserAccounts` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `user_info_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user_accounts` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `user_info`;
+INSERT INTO `user_info` (`user_info_id`, `user_id`, `name`, `gender`, `birthday`) VALUES
+(1,	1,	'Gigel',	'M',	NULL);
 
-DROP TABLE IF EXISTS `UserTreatmentAllocation`;
-CREATE TABLE `UserTreatmentAllocation` (
+DROP TABLE IF EXISTS `user_treatment_allocation`;
+CREATE TABLE `user_treatment_allocation` (
   `user_treatment_id` int NOT NULL AUTO_INCREMENT,
   `user_info_id` int NOT NULL,
   `treatment_id` int NOT NULL,
   PRIMARY KEY (`user_treatment_id`),
   KEY `user_info_id` (`user_info_id`),
   KEY `treatment_id` (`treatment_id`),
-  CONSTRAINT `UserTreatmentAllocation_ibfk_1` FOREIGN KEY (`user_info_id`) REFERENCES `UserInfo` (`user_info_id`) ON DELETE CASCADE,
-  CONSTRAINT `UserTreatmentAllocation_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `Treatments` (`treatment_id`) ON DELETE CASCADE
+  CONSTRAINT `user_treatment_allocation_ibfk_1` FOREIGN KEY (`user_info_id`) REFERENCES `user_info` (`user_info_id`) ON DELETE CASCADE,
+  CONSTRAINT `user_treatment_allocation_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `treatments` (`treatment_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+TRUNCATE `user_treatment_allocation`;
 
--- 2021-03-12 18:07:17
+-- 2021-03-15 11:25:14
