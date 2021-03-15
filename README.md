@@ -4,4 +4,6 @@ This repo contains everything needed for building & running the Medi database in
 
 ## Instructions
 
-todo
+Start: `docker-compose up`
+Stop: `docker-compose down`
+Delete persistant storage: `docker-compose down -v`
