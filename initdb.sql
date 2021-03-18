@@ -26,7 +26,7 @@ TRUNCATE `caretakers`;
 
 DROP TABLE IF EXISTS `concentrations`;
 CREATE TABLE `concentrations` (
-  `concentration_id` tinyint NOT NULL AUTO_INCREMENT,
+  `concentration_id` int NOT NULL AUTO_INCREMENT,
   `concentration_amount` varchar(255) NOT NULL,
   PRIMARY KEY (`concentration_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -130,7 +130,7 @@ CREATE TABLE `treatments` (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `unit_id` int NOT NULL,
   `dosage_id` int NOT NULL,
-  `concentration_id` tinyint NOT NULL,
+  `concentration_id` int NOT NULL,
   `color` varchar(255) NOT NULL,
   PRIMARY KEY (`treatment_id`),
   KEY `unit_id` (`unit_id`),
