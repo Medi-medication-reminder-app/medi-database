@@ -11,12 +11,14 @@ DROP DATABASE IF EXISTS `mediusers`;
 CREATE DATABASE `mediusers` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `mediusers`;
 
+TRUNCATE `__diesel_schema_migrations`;
+
 DROP TABLE IF EXISTS `caretakers`;
 CREATE TABLE `caretakers` (
-  `phone_number` int NOT NULL,
-  `user_id` int NOT NULL,
   `caretaker_id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `phone_number` int NOT NULL,
   PRIMARY KEY (`caretaker_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `caretakers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE
@@ -161,12 +163,14 @@ CREATE TABLE `user_accounts` (
   `password` varchar(255) NOT NULL,
   `create_date` date NOT NULL,
   `last_login` timestamp NOT NULL,
-  PRIMARY KEY (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`account_id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 TRUNCATE `user_accounts`;
 INSERT INTO `user_accounts` (`account_id`, `email`, `password`, `create_date`, `last_login`) VALUES
-(1,	'gigel@email.com',	'sha512',	'2014-03-20',	'2015-03-20 21:00:00');
+(1,	'gigel@email.com',	'sha512',	'2014-03-20',	'2015-03-20 21:00:00'),
+(2,	'drojdel@beabere.ro',	'abcd',	'2021-03-18',	'2021-03-18 15:33:11');
 
 DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info` (
@@ -178,10 +182,11 @@ CREATE TABLE `user_info` (
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`account_id`),
   CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `user_accounts` (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 TRUNCATE `user_info`;
 INSERT INTO `user_info` (`user_id`, `account_id`, `name`, `gender`, `birthday`) VALUES
-(2,	1,	'Gigel',	'M',	NULL);
+(2,	1,	'Gigel',	'M',	NULL),
+(3,	2,	'Drojdel',	NULL,	NULL);
 
--- 2021-03-17 18:28:57
+-- 2021-03-18 15:37:35
