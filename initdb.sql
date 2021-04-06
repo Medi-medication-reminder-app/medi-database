@@ -1,4 +1,5 @@
 -- Adminer 4.8.0 MySQL 8.0.23 dump
+-- ALTER USER 'mediadmin'@'medidb' IDENTIFIED WITH mysql_native_password BY 'changethis';
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -8,21 +9,21 @@ SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 SET NAMES utf8mb4;
 
 DROP DATABASE IF EXISTS `mediusers`;
-CREATE DATABASE `mediusers` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE `mediusers` ;
 USE `mediusers`;
 
-TRUNCATE `__diesel_schema_migrations`;
+-- TRUNCATE `__diesel_schema_migrations`;
 
 DROP TABLE IF EXISTS `caretakers`;
 CREATE TABLE `caretakers` (
   `caretaker_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(255)  NOT NULL,
   `phone_number` int NOT NULL,
   PRIMARY KEY (`caretaker_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `caretakers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `caretakers`;
 
@@ -31,7 +32,7 @@ CREATE TABLE `concentrations` (
   `concentration_id` int NOT NULL AUTO_INCREMENT,
   `concentration_amount` varchar(255) NOT NULL,
   PRIMARY KEY (`concentration_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `concentrations`;
 
@@ -39,12 +40,12 @@ DROP TABLE IF EXISTS `conditions`;
 CREATE TABLE `conditions` (
   `condition_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `condition_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `condition_details` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `condition_name` varchar(255)  NOT NULL,
+  `condition_details` varchar(255)  NOT NULL,
   PRIMARY KEY (`condition_id`),
   KEY `user_info_id` (`user_id`),
   CONSTRAINT `conditions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `conditions`;
 
@@ -53,7 +54,7 @@ CREATE TABLE `dosages` (
   `dosage_id` int NOT NULL AUTO_INCREMENT,
   `dosage_type` varchar(255) NOT NULL,
   PRIMARY KEY (`dosage_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `dosages`;
 
@@ -62,7 +63,7 @@ CREATE TABLE `feelings` (
   `feeling_id` int NOT NULL AUTO_INCREMENT,
   `feeling_name` varchar(255) NOT NULL,
   PRIMARY KEY (`feeling_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `feelings`;
 
@@ -78,7 +79,7 @@ CREATE TABLE `journal_entries` (
   KEY `feeling_id` (`feeling_id`),
   CONSTRAINT `journal_entries_ibfk_2` FOREIGN KEY (`feeling_id`) REFERENCES `feelings` (`feeling_id`) ON DELETE CASCADE,
   CONSTRAINT `journal_entries_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `journal_entries`;
 
@@ -95,7 +96,7 @@ CREATE TABLE `take_times` (
   KEY `treatment_id` (`treatment_id`),
   CONSTRAINT `take_times_ibfk_1` FOREIGN KEY (`preference_id`) REFERENCES `time_preferences` (`preference_id`) ON DELETE RESTRICT,
   CONSTRAINT `take_times_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `treatments` (`treatment_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `take_times`;
 
@@ -112,7 +113,7 @@ CREATE TABLE `taken_treatment_log` (
   KEY `treatment_id` (`treatment_id`),
   CONSTRAINT `taken_treatment_log_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `treatments` (`treatment_id`),
   CONSTRAINT `taken_treatment_log_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `taken_treatment_log`;
 
@@ -121,7 +122,7 @@ CREATE TABLE `time_preferences` (
   `preference_id` int NOT NULL AUTO_INCREMENT,
   `preference_type` varchar(255) NOT NULL,
   PRIMARY KEY (`preference_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `time_preferences`;
 
@@ -129,7 +130,7 @@ DROP TABLE IF EXISTS `treatments`;
 CREATE TABLE `treatments` (
   `treatment_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(255)  NOT NULL,
   `unit_id` int NOT NULL,
   `dosage_id` int NOT NULL,
   `concentration_id` int NOT NULL,
@@ -143,7 +144,7 @@ CREATE TABLE `treatments` (
   CONSTRAINT `treatments_ibfk_2` FOREIGN KEY (`dosage_id`) REFERENCES `dosages` (`dosage_id`) ON DELETE CASCADE,
   CONSTRAINT `treatments_ibfk_3` FOREIGN KEY (`concentration_id`) REFERENCES `concentrations` (`concentration_id`) ON DELETE CASCADE,
   CONSTRAINT `treatments_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `treatments`;
 
@@ -152,7 +153,7 @@ CREATE TABLE `units` (
   `unit_id` int NOT NULL AUTO_INCREMENT,
   `unit_name` varchar(255) NOT NULL,
   PRIMARY KEY (`unit_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 TRUNCATE `units`;
 
@@ -165,7 +166,7 @@ CREATE TABLE `user_accounts` (
   `last_login` timestamp NOT NULL,
   PRIMARY KEY (`account_id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4;
 
 TRUNCATE `user_accounts`;
 INSERT INTO `user_accounts` (`account_id`, `email`, `password`, `create_date`, `last_login`) VALUES
@@ -176,17 +177,16 @@ DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `account_id` int NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `name` varchar(255)  DEFAULT NULL,
+  `gender` varchar(255)  DEFAULT NULL,
   `birthday` date DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`account_id`),
   CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `user_accounts` (`account_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5;
 
 TRUNCATE `user_info`;
 INSERT INTO `user_info` (`user_id`, `account_id`, `name`, `gender`, `birthday`) VALUES
 (2,	1,	'Gigel',	'M',	NULL),
 (3,	2,	'Drojdel',	NULL,	NULL);
-
 -- 2021-03-18 15:37:35
