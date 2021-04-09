@@ -295,7 +295,7 @@ CREATE TABLE `take_times` (
   `treatment_id` int(11) NOT NULL,
   `time` time NOT NULL,
   `day` varchar(255) NOT NULL,
-  `preference_id` int(11) NOT NULL,
+  `preference_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`take_time_id`),
   KEY `preference_id` (`preference_id`),
   KEY `treatment_id` (`treatment_id`),
