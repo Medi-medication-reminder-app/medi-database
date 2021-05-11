@@ -65,9 +65,13 @@ CREATE TABLE `feelings` (
   `feeling_id` int(11) NOT NULL AUTO_INCREMENT,
   `feeling_name` varchar(255) NOT NULL,
   PRIMARY KEY (`feeling_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 TRUNCATE `feelings`;
+INSERT INTO `feelings` (`feeling_id`, `feeling_name`) VALUES
+(1,	'Sickness'),
+(2,	'Dizziness'),
+(3,	'Pain');
 
 DROP TABLE IF EXISTS `journal_entries`;
 CREATE TABLE `journal_entries` (
@@ -81,9 +85,12 @@ CREATE TABLE `journal_entries` (
   KEY `feeling_id` (`feeling_id`),
   CONSTRAINT `journal_entries_ibfk_2` FOREIGN KEY (`feeling_id`) REFERENCES `feelings` (`feeling_id`) ON DELETE CASCADE,
   CONSTRAINT `journal_entries_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 TRUNCATE `journal_entries`;
+INSERT INTO `journal_entries` (`entry_id`, `user_id`, `timestamp`, `feeling_id`, `details`) VALUES
+(1,	4,	'2021-05-10 10:07:55',	2,	'after 30 min of taking treatment, the room started spinning'),
+(2,	4,	'2021-05-10 10:17:33',	3,	'<insert DOOM music here>');
 
 DROP TABLE IF EXISTS `taken_treatment_log`;
 CREATE TABLE `taken_treatment_log` (
@@ -98,13 +105,14 @@ CREATE TABLE `taken_treatment_log` (
   KEY `treatment_id` (`treatment_id`),
   CONSTRAINT `taken_treatment_log_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `treatments` (`treatment_id`),
   CONSTRAINT `taken_treatment_log_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 TRUNCATE `taken_treatment_log`;
 INSERT INTO `taken_treatment_log` (`taken_log_id`, `user_id`, `treatment_id`, `timestamp`, `taken_time`, `taken`) VALUES
 (3,	4,	1,	'2021-04-22 13:46:55',	'19:36:57',	'NO'),
 (4,	4,	1,	'2021-04-22 13:47:09',	'19:36:58',	'NO'),
-(5,	4,	2,	'2021-04-22 13:48:56',	'23:37:54',	'YES');
+(5,	4,	2,	'2021-04-22 13:48:56',	'23:37:54',	'YES'),
+(7,	4,	2,	'2021-05-10 08:19:51',	'23:37:54',	'YES');
 
 DROP TABLE IF EXISTS `take_times`;
 CREATE TABLE `take_times` (
@@ -118,15 +126,15 @@ CREATE TABLE `take_times` (
   KEY `treatment_id` (`treatment_id`),
   CONSTRAINT `take_times_ibfk_1` FOREIGN KEY (`preference_id`) REFERENCES `time_preferences` (`preference_id`),
   CONSTRAINT `take_times_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `treatments` (`treatment_id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 TRUNCATE `take_times`;
 INSERT INTO `take_times` (`take_time_id`, `treatment_id`, `time`, `day`, `preference_id`) VALUES
-(11,	1,	'19:36:58',	'Everyday',	1),
-(12,	1,	'19:37:11',	'Sunday',	NULL),
-(13,	1,	'19:37:54',	'Sunday',	NULL),
-(14,	1,	'23:37:54',	'Thursday',	NULL),
-(18,	2,	'23:37:54',	'Thursday',	NULL);
+(18,	2,	'23:37:54',	'Thursday',	NULL),
+(19,	1,	'19:36:58',	'Everyday',	1),
+(20,	1,	'19:37:11',	'Sunday',	NULL),
+(21,	1,	'19:37:54',	'Sunday',	NULL),
+(22,	1,	'23:37:54',	'Thursday',	NULL);
 
 DROP TABLE IF EXISTS `time_preferences`;
 CREATE TABLE `time_preferences` (
@@ -150,6 +158,7 @@ CREATE TABLE `treatments` (
   `frequency` int(11) NOT NULL,
   `color` varchar(255) NOT NULL,
   PRIMARY KEY (`treatment_id`),
+  UNIQUE KEY `name` (`name`),
   KEY `unit_id` (`unit_id`),
   KEY `dosage_id` (`dosage_id`),
   KEY `concentration_id` (`concentration_id`),
@@ -217,4 +226,4 @@ INSERT INTO `user_info` (`user_id`, `account_id`, `name`, `gender`, `birthday`) 
 (6,	6,	NULL,	NULL,	NULL),
 (7,	7,	NULL,	NULL,	NULL);
 
--- 2021-04-22 14:44:43
+-- 2021-05-11 11:07:52
