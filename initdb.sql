@@ -224,14 +224,14 @@ CREATE TABLE `user_info` (
   `account_id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `gender` varchar(255) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
+  `age` int(2) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   KEY `user_id` (`account_id`),
   CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `user_accounts` (`account_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 TRUNCATE `user_info`;
-INSERT INTO `user_info` (`user_id`, `account_id`, `name`, `gender`, `birthday`) VALUES
+INSERT INTO `user_info` (`user_id`, `account_id`, `name`, `gender`, `age`) VALUES
 (2,	1,	'Gigel',	'M',	NULL),
 (3,	2,	'Drojdel',	NULL,	NULL),
 (4,	3,	'Dorel',	'male',	NULL),
