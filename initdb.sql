@@ -34,7 +34,8 @@ CREATE TABLE `concentrations` (
 TRUNCATE `concentrations`;
 INSERT INTO `concentrations` (`concentration_id`, `concentration_amount`) VALUES
 (1,	'g/ml'),
-(2,	'ml/g');
+(2,	'ml/g'),
+(3,	'none');
 
 DROP TABLE IF EXISTS `conditions`;
 CREATE TABLE `conditions` (
@@ -58,7 +59,11 @@ CREATE TABLE `dosages` (
 
 TRUNCATE `dosages`;
 INSERT INTO `dosages` (`dosage_id`, `dosage_type`) VALUES
-(1,	'1/3');
+(1,	'1/3'),
+(2,	'1'),
+(3,	'2'),
+(4,	'3'),
+(5,	'1/2');
 
 DROP TABLE IF EXISTS `feelings`;
 CREATE TABLE `feelings` (
@@ -103,7 +108,7 @@ CREATE TABLE `taken_treatment_log` (
   PRIMARY KEY (`taken_log_id`),
   KEY `user_info_id` (`user_id`),
   KEY `treatment_id` (`treatment_id`),
-  CONSTRAINT `taken_treatment_log_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `treatments` (`treatment_id`),
+  CONSTRAINT `taken_treatment_log_ibfk_2` FOREIGN KEY (`treatment_id`) REFERENCES `treatments` (`treatment_id`) ON DELETE CASCADE,
   CONSTRAINT `taken_treatment_log_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
@@ -145,7 +150,9 @@ CREATE TABLE `time_preferences` (
 
 TRUNCATE `time_preferences`;
 INSERT INTO `time_preferences` (`preference_id`, `preference_type`) VALUES
-(1,	'after lunch');
+(1,	'after meal'),
+(2,	'before meal'),
+(3,	'before bed');
 
 DROP TABLE IF EXISTS `treatments`;
 CREATE TABLE `treatments` (
@@ -158,7 +165,6 @@ CREATE TABLE `treatments` (
   `frequency` int(11) NOT NULL,
   `color` varchar(255) NOT NULL,
   PRIMARY KEY (`treatment_id`),
-  UNIQUE KEY `name` (`name`),
   KEY `unit_id` (`unit_id`),
   KEY `dosage_id` (`dosage_id`),
   KEY `concentration_id` (`concentration_id`),
@@ -183,7 +189,14 @@ CREATE TABLE `units` (
 
 TRUNCATE `units`;
 INSERT INTO `units` (`unit_id`, `unit_name`) VALUES
-(1,	'capsule');
+(1,	'capsule(s)'),
+(2,	'pill(s)'),
+(3,	'tablespoon(s)'),
+(4,	'teaspoon(s)'),
+(5,	'drop(s)'),
+(6,	'puff(s)'),
+(7,	'injection(s)'),
+(8,	'piece(s)');
 
 DROP TABLE IF EXISTS `user_accounts`;
 CREATE TABLE `user_accounts` (
