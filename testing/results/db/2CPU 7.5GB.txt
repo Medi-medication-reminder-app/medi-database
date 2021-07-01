@@ -1,0 +1,71 @@
+Concurrency 10
+Iterations 50
+Rampup 2
+Base URL https://backend-i6aduo54iq-lz.a.run.app
+
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4095ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4096ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4097ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4099ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4947ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5032ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5092ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 6237ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 6238ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 6238ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 2529ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 2532ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 2534ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 2533ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 2195ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 2514ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 2543ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 2529ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 3043ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 3447ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 3144ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4266ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4782ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5187ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4769ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5484ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5913ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5186ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4772ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5484ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5906ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5188ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4779ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5474ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5895ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5181ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4775ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5478ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5894ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5182ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4780ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5480ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5888ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5193ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4788ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5485ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5890ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5189ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 4786ms
+GET Today                 https://backend-i6aduo54iq-lz.a.run.app/today 200 OK 5484ms
+
+GET Today                 Total requests            50
+GET Today                 Successful requests       50
+GET Today                 Failed requests           0
+GET Today                 Median time per request   5032ms
+GET Today                 Average time per request  4645ms
+GET Today                 Sample standard deviation 1179ms
+
+Time taken for tests      25.8 seconds
+Total requests            50
+Successful requests       50
+Failed requests           0
+Requests per second       1.93 [#/sec]
+Median time per request   5032ms
+Average time per request  4645ms
+Sample standard deviation 1179ms

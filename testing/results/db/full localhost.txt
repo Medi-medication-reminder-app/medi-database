@@ -1,0 +1,69 @@
+Concurrency 10
+Iterations 50
+Rampup 2
+Base URL http://localhost:8000
+
+GET Today                 http://localhost:8000/today 200 OK 34ms
+GET Today                 http://localhost:8000/today 200 OK 55ms
+GET Today                 http://localhost:8000/today 200 OK 68ms
+GET Today                 http://localhost:8000/today 200 OK 101ms
+GET Today                 http://localhost:8000/today 200 OK 156ms
+GET Today                 http://localhost:8000/today 200 OK 157ms
+GET Today                 http://localhost:8000/today 200 OK 165ms
+GET Today                 http://localhost:8000/today 200 OK 177ms
+GET Today                 http://localhost:8000/today 200 OK 157ms
+GET Today                 http://localhost:8000/today 200 OK 150ms
+GET Today                 http://localhost:8000/today 200 OK 201ms
+GET Today                 http://localhost:8000/today 200 OK 235ms
+GET Today                 http://localhost:8000/today 200 OK 213ms
+GET Today                 http://localhost:8000/today 200 OK 185ms
+GET Today                 http://localhost:8000/today 200 OK 213ms
+GET Today                 http://localhost:8000/today 200 OK 153ms
+GET Today                 http://localhost:8000/today 200 OK 148ms
+GET Today                 http://localhost:8000/today 200 OK 153ms
+GET Today                 http://localhost:8000/today 200 OK 272ms
+GET Today                 http://localhost:8000/today 200 OK 120ms
+GET Today                 http://localhost:8000/today 200 OK 248ms
+GET Today                 http://localhost:8000/today 200 OK 176ms
+GET Today                 http://localhost:8000/today 200 OK 170ms
+GET Today                 http://localhost:8000/today 200 OK 216ms
+GET Today                 http://localhost:8000/today 200 OK 76ms
+GET Today                 http://localhost:8000/today 200 OK 281ms
+GET Today                 http://localhost:8000/today 200 OK 288ms
+GET Today                 http://localhost:8000/today 200 OK 281ms
+GET Today                 http://localhost:8000/today 200 OK 161ms
+GET Today                 http://localhost:8000/today 200 OK 117ms
+GET Today                 http://localhost:8000/today 200 OK 224ms
+GET Today                 http://localhost:8000/today 200 OK 122ms
+GET Today                 http://localhost:8000/today 200 OK 146ms
+GET Today                 http://localhost:8000/today 200 OK 139ms
+GET Today                 http://localhost:8000/today 200 OK 122ms
+GET Today                 http://localhost:8000/today 200 OK 159ms
+GET Today                 http://localhost:8000/today 200 OK 208ms
+GET Today                 http://localhost:8000/today 200 OK 241ms
+GET Today                 http://localhost:8000/today 200 OK 150ms
+GET Today                 http://localhost:8000/today 200 OK 117ms
+GET Today                 http://localhost:8000/today 200 OK 292ms
+GET Today                 http://localhost:8000/today 200 OK 180ms
+GET Today                 http://localhost:8000/today 200 OK 299ms
+GET Today                 http://localhost:8000/today 200 OK 188ms
+GET Today                 http://localhost:8000/today 200 OK 67ms
+GET Today                 http://localhost:8000/today 200 OK 150ms
+GET Today                 http://localhost:8000/today 200 OK 117ms
+GET Today                 http://localhost:8000/today 200 OK 131ms
+
+GET Today                 Total requests            50
+GET Today                 Successful requests       40
+GET Today                 Failed requests           10
+GET Today                 Median time per request   153ms
+GET Today                 Average time per request  140ms
+GET Today                 Sample standard deviation 87ms
+
+Time taken for tests      0.8 seconds
+Total requests            50
+Successful requests       40
+Failed requests           10
+Requests per second       65.90 [#/sec]
+Median time per request   153ms
+Average time per request  140ms
+Sample standard deviation 87ms

@@ -1,0 +1,71 @@
+Concurrency 10
+Iterations 50
+Rampup 2
+Base URL http://localhost:8001
+
+GET Today                 http://localhost:8001/today 200 OK 2975ms
+GET Today                 http://localhost:8001/today 200 OK 2986ms
+GET Today                 http://localhost:8001/today 200 OK 2986ms
+GET Today                 http://localhost:8001/today 200 OK 3011ms
+GET Today                 http://localhost:8001/today 200 OK 3012ms
+GET Today                 http://localhost:8001/today 200 OK 3164ms
+GET Today                 http://localhost:8001/today 200 OK 3164ms
+GET Today                 http://localhost:8001/today 200 OK 3202ms
+GET Today                 http://localhost:8001/today 200 OK 5571ms
+GET Today                 http://localhost:8001/today 200 OK 5608ms
+GET Today                 http://localhost:8001/today 200 OK 2633ms
+GET Today                 http://localhost:8001/today 200 OK 2657ms
+GET Today                 http://localhost:8001/today 200 OK 2657ms
+GET Today                 http://localhost:8001/today 200 OK 2919ms
+GET Today                 http://localhost:8001/today 200 OK 2942ms
+GET Today                 http://localhost:8001/today 200 OK 2852ms
+GET Today                 http://localhost:8001/today 200 OK 4988ms
+GET Today                 http://localhost:8001/today 200 OK 5018ms
+GET Today                 http://localhost:8001/today 200 OK 2651ms
+GET Today                 http://localhost:8001/today 200 OK 2650ms
+GET Today                 http://localhost:8001/today 200 OK 2650ms
+GET Today                 http://localhost:8001/today 200 OK 3043ms
+GET Today                 http://localhost:8001/today 200 OK 3079ms
+GET Today                 http://localhost:8001/today 200 OK 2882ms
+GET Today                 http://localhost:8001/today 200 OK 4788ms
+GET Today                 http://localhost:8001/today 200 OK 4831ms
+GET Today                 http://localhost:8001/today 200 OK 2694ms
+GET Today                 http://localhost:8001/today 200 OK 2662ms
+GET Today                 http://localhost:8001/today 200 OK 2673ms
+GET Today                 http://localhost:8001/today 200 OK 3199ms
+GET Today                 http://localhost:8001/today 200 OK 3237ms
+GET Today                 http://localhost:8001/today 200 OK 2943ms
+GET Today                 http://localhost:8001/today 200 OK 4594ms
+GET Today                 http://localhost:8001/today 200 OK 2701ms
+GET Today                 http://localhost:8001/today 200 OK 4632ms
+GET Today                 http://localhost:8001/today 200 OK 2637ms
+GET Today                 http://localhost:8001/today 200 OK 2675ms
+GET Today                 http://localhost:8001/today 200 OK 3079ms
+GET Today                 http://localhost:8001/today 200 OK 3321ms
+GET Today                 http://localhost:8001/today 200 OK 3350ms
+GET Today                 http://localhost:8001/today 200 OK 2950ms
+GET Today                 http://localhost:8001/today 200 OK 4411ms
+GET Today                 http://localhost:8001/today 200 OK 2739ms
+GET Today                 http://localhost:8001/today 200 OK 4425ms
+GET Today                 http://localhost:8001/today 200 OK 2648ms
+GET Today                 http://localhost:8001/today 200 OK 2719ms
+GET Today                 http://localhost:8001/today 200 OK 3491ms
+GET Today                 http://localhost:8001/today 200 OK 3495ms
+GET Today                 http://localhost:8001/today 200 OK 3019ms
+GET Today                 http://localhost:8001/today 200 OK 4276ms
+
+GET Today                 Total requests            50
+GET Today                 Successful requests       49
+GET Today                 Failed requests           1
+GET Today                 Median time per request   3011ms
+GET Today                 Average time per request  3288ms
+GET Today                 Sample standard deviation 962ms
+
+Time taken for tests      18.5 seconds
+Total requests            50
+Successful requests       49
+Failed requests           1
+Requests per second       2.70 [#/sec]
+Median time per request   3011ms
+Average time per request  3288ms
+Sample standard deviation 962ms
